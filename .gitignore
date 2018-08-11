@@ -11,3 +11,5 @@
 jokedisplaylibrary/build/intermediates/
 
 jokedisplaylibrary/build/
+
+backend/build/dev-appserver-out/dev_appserver\.out
