@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.sidprice.android.jokedisplaylibrary.JokeTellActivity;
-import com.sidprice.android.jokesprovider.Jokes;
 
 import static com.sidprice.android.jokedisplaylibrary.JokeTellActivity.*;
 
@@ -46,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        Jokes   jokes = new Jokes() ;
-        String  joke = jokes.getJoke() ;
-        Intent  intent = new Intent(this, JokeTellActivity.class) ;
-        intent.putExtra(JOKE_KEY, joke) ;
-        startActivity(intent);
+//        Jokes   jokes = new Jokes() ;
+//        String  joke = jokes.getJoke() ;
+//        Intent  intent = new Intent(this, JokeTellActivity.class) ;
+//        intent.putExtra(JOKE_KEY, joke) ;
+//        startActivity(intent);
     }
 
 
