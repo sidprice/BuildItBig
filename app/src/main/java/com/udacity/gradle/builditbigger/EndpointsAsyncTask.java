@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.widget.Toast;
@@ -9,9 +10,13 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.sidprice.android.jokedisplaylibrary.JokeTellActivity;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
+
+import static com.sidprice.android.jokedisplaylibrary.JokeTellActivity.JOKE_KEY;
+
 /*
     This class is based upon the Google Cloud Platform Gradle App_Engine repo code
 
@@ -21,6 +26,7 @@ import java.io.IOException;
 class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private Context appContext ;
 
     @Override
     protected String doInBackground(Context... params) {
@@ -43,6 +49,7 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
         }
 
         context = params[0] ;
+        appContext = context.getApplicationContext() ;
 
         try {
             return myApiService.getJoke().execute().getData();
@@ -53,6 +60,10 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        // Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        Intent  intent = new Intent(context, JokeTellActivity.class) ;
+        intent.putExtra(JOKE_KEY, result) ;
+        appContext.startActivity(intent);
+
     }
 }
