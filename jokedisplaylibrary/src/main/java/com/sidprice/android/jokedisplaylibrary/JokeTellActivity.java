@@ -16,10 +16,10 @@ public class JokeTellActivity extends AppCompatActivity {
         mTextView = findViewById(R.id.joke_tv) ;
         Intent  intent = getIntent() ;
         String  joke = intent.getStringExtra(JOKE_KEY) ;
-        if ( joke != null ) {
+        if ( joke != null && !joke.equals("")) {
             mTextView.setText(joke);
         } else {
-            Toast.makeText(this, "No joke for you!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Unable to contact the joke provider\nPlease try again later", Toast.LENGTH_LONG).show();
         }
     }
 }
