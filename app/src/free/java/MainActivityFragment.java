@@ -48,6 +48,8 @@ public class MainActivityFragment extends Fragment {
             public void onClick(View view) {
                 if ( mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();
+                } else {
+                    new EndpointsAsyncTask().execute(mContext) ;
                 }
             }
         });
