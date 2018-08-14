@@ -8,17 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
-import com.udacity.gradle.builditbigger.R;
-
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
     Context mContext ;
+    InterstitialAd  mInterstitialAd ;
 
     public MainActivityFragment() {
     }
@@ -28,14 +29,28 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         mContext = getContext() ;
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+        //
+        MobileAds.initialize(mContext,
+                "ca-app-pub-3940256099942544~3347511713");
+        mInterstitialAd = new InterstitialAd(mContext);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                new EndpointsAsyncTask().execute(mContext) ;
+            }
+        });
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
         Button button = root.findViewById(R.id.tellJoke_btn) ;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new EndpointsAsyncTask().execute(mContext) ;
+                if ( mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
             }
         });
-
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
@@ -47,9 +62,4 @@ public class MainActivityFragment extends Fragment {
         mAdView.loadAd(adRequest);
         return root;
     }
-
-    public void tellJoke(View view) {
-        new EndpointsAsyncTask().execute(getActivity()) ;
-    }
-
 }
