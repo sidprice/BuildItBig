@@ -35,12 +35,10 @@ android {
 
     productFlavors {
         free {
-            dimension "version"
             applicationIdSuffix ".free"
         }
         paid {
             dimension "version"
-            applicationIdSuffix ".paid"
         }
     }
 }

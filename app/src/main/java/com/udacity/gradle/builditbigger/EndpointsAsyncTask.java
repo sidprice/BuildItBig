@@ -23,7 +23,7 @@ import static com.sidprice.android.jokedisplaylibrary.JokeTellActivity.JOKE_KEY;
     https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/77e9910911d5412e5efede5fa681ec105a0f02ad/HelloEndpoints#2-connecting-your-android-app-to-the-backend
  */
 //class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
     private Context appContext ;
